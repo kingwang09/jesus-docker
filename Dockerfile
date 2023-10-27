@@ -19,7 +19,8 @@ WORKDIR /app
 COPY package*.json ./
 COPY *.json ./
 COPY babel.config.js ./
-COPY ./prisma/schema.prisma ./
+COPY ./prisma/schema.prisma ./prisma/schema.prisma
+COPY ./prisma/seed.ts ./prisma/seed.ts
 RUN npm install
 
 # wait-for-it.sh

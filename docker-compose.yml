@@ -31,7 +31,8 @@ services:
       - -c
       - |
         /app/wait-for-it.sh postgresql-docker:5432 -t 10
-        npx prisma migrate dev --name initial-state
+        npx prisma migrate dev
+        npx prisma db seed
         npm test
     volumes:
       - ./src/:/app/src/

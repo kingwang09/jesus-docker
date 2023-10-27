@@ -6,6 +6,9 @@
   "scripts": {
     "test": "jest"
   },
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
+  },
   "keywords": [
     "node",
     "docker",
