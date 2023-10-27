@@ -1,0 +1,71 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  //url      = env("DATABASE_URL")
+  url = "postgresql://docker:dockertest1!@postgresql-docker:5432/docker_db?schema=public"
+}
+
+
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// generator client {
+//   provider        = "prisma-client-js"
+//   previewFeatures = ["clientExtensions"]
+// }
+
+model User {
+  id    Int     @id @default(autoincrement())
+  email String  @unique
+  name  String?
+  profile Profile?
+
+  //relation이 중복으로 된 경우, Qulified해줘야한다.
+  writtenPosts Post[] @relation("WrittenPosts") //one-to-many
+  pinnedPost   Post?  @relation("PinnedPost")   //one-to-one
+
+  //json
+  extendedPetsData Json?
+}
+
+model Profile {
+  id     Int  @id @default(autoincrement())
+  user   User @relation(fields: [userId], references: [id])
+  userId Int  @unique // relation scalar field (used in the `@relation` attribute above)
+}
+
+model Post {
+  id        Int     @id @default(autoincrement())
+  title     String
+  content   String?
+  published Boolean @default(false)
+
+  //many-to-one(fk)
+  author    User    @relation("WrittenPosts", fields: [authorId], references: [id])
+  authorId  Int
+
+  //one-to-one(fk)
+  pinnedBy  User?   @relation("PinnedPost", fields: [pinnedById], references: [id])
+  pinnedById Int?   @unique //이게 필수임.
+
+  categories Category[]
+}
+
+model Category {
+  id    Int    @id @default(autoincrement())
+  posts Post[]
+}
+
+model TimePeriod {
+  year    Int
+  quarter Int
+  total   Decimal
+
+  @@unique(fields: [year, quarter], name: "timePeriodId")
+}
