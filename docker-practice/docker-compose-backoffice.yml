@@ -34,4 +34,4 @@ services:
         npx prisma migrate dev --name initial-state
         npm test
     volumes:
-      - ./src/:/app/src/
+      - ./:/app/

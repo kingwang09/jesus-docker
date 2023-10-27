@@ -17,12 +17,10 @@ WORKDIR /app
 
 # Only copy the package.json file to work directory
 COPY package*.json ./
+COPY *.json ./
+COPY babel.config.js ./
 COPY ./prisma/schema.prisma ./
-COPY .env ./
-#COPY ./db/*.sql /app/import/
 RUN npm install
-
-
 
 # wait-for-it.sh
 COPY wait-for-it.sh ./
