@@ -20,6 +20,12 @@ jobs:
       - name: Start containers
         run: docker-compose -f "docker-compose.yml" up -d --build
 
+      # Github Repository Secrets를 통해 환경 변수 파일을 생성합니다.
+      - name: Generate Environment Variables File for Production
+        run: |
+          echo "DATABASE_URL=$DATABASE_URL" >> .env
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
       # Node 16 버전을 사용합니다.
       - name: Install node
         uses: actions/setup-node@v2
