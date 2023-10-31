@@ -131,3 +131,5 @@ dist
 
 *.sql
 migrations/
+
+src/nosearch/
