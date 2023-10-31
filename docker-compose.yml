@@ -31,8 +31,13 @@ services:
       - -c
       - |
         /app/wait-for-it.sh postgresql-docker:5432 -t 10
-        npx prisma migrate dev
-        npx prisma db seed
-        npm test
+        yarn set version berry
+        yarn --version
+        echo `date`
+        yarn install
+        yarn prisma db push
+        yarn prisma generate
+        yarn prisma db seed
+        yarn test
     volumes:
       - ./src/:/app/src/
