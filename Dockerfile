@@ -22,6 +22,7 @@ COPY *.yml ./
 COPY babel.config.js ./
 COPY ./prisma/schema.prisma ./prisma/schema.prisma
 COPY ./prisma/seed.ts ./prisma/seed.ts
+COPY ./.docker_env ./.env
 
 # wait-for-it.sh
 COPY wait-for-it.sh ./

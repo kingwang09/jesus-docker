@@ -1,0 +1,1 @@
+DATABASE_URL="postgresql://docker:dockertest1!@postgresql-docker:5432/docker_db?schema=public"
