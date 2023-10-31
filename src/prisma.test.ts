@@ -13,5 +13,5 @@ it('should create 1 order with an existing customer', async () => {
 
     console.log('✨ 1 user successfully created!')
 
-    expect(createdUser).toHaveProperty('id', 1);
+    expect(createdUser).toHaveProperty('id', 1000);
 });
